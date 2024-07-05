@@ -24,11 +24,6 @@ from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
 from reportlab.lib.units import inch
 
 
-# Vontage configuration
-VONTAGE_API_KEY = 'ea46d8f3'
-VONTAGE_API_SECRET = '3OxjaLLNc1WVF6f2'
-VONTAGE_PHONE_NUMBER = 'Vonage APIs'
-
 
 # Initialize Vontage Client
 vontage_client = VonageClient(key=VONTAGE_API_KEY, secret=VONTAGE_API_SECRET)
