@@ -1,11 +1,11 @@
 import vonage
-client = vonage.Client(key="ea46d8f3", secret="3OxjaLLNc1WVF6f2")
+client = vonage.Client(key="KEY", secret="SECRET")
 sms = vonage.Sms(client)
 
 responseData = sms.send_message(
     {
         "from": "Vonage APIs",
-        "to": "233550545381",
+        "to": "NUMBER",
         "text": "Kriss we are testing again",
     }
 )
