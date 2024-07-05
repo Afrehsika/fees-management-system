@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-2">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'finance:bill'%}">Bill</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add Bill</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="card">
+    <div class="card-body">
+      <form action="{% url 'finance:add_bill' %}" method="post" class="row g-3">
+        {% csrf_token %}
+        {% include 'partials/_messages.html'%}
+        <div class="col-md-12">
+          <label for="">Level</label>
+          <select name="level" class="form-select form-select-sm">
+            {% for level_code, level_name in level %}
+              <option value="{{ level_code }}">{{ level_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label for="">Session</label>
+          <select name="session" class="form-select form-select-sm">
+              {% for session in sessionq %}
+                  <option value="{{ session }}">{{ session.session }}</option>
+              {% endfor %}
+          </select>
+      </div>
+      
+        <div class="col-md-12">
+            <label for="">Academic Fees</label>
+            <input type="number" value="{{values.academic_fees}}" name="academic" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-12">
+          <label for="">Student Fee</label>
+          <input type="number" value="{{values.student_fees}}" name="student" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-12">
+            <label for="">Examination Fees</label>
+            <input type="number" value="{{values.exams_fees}}" name="exams" class="form-control form-control-sm">
+          </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+</div>
+
+{% endblock content %}

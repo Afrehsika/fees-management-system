@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'finance:bill'%}">Bill</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Bill</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-info">
+            <h5 class="card-title text-center bg-info">Update Billing or Fees</h5>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'finance:edit_bill' level_bill.id %}" method="post" class="row g-3">
+                {% csrf_token %}
+                {% include 'partials/_messages.html'%}
+                <div class="col-md-12">
+                    <label for="id_level" class="form-label">Level</label>
+                    <select name="level" id="id_level" class="form-select form-select-sm">
+                        {% for level_code, level_name in level %}
+                        <option value="{{ level_code }}" {% if level_code == values.level %} selected {% endif %}>
+                            {{ level_name }}</option> <!-- Added selected attribute if the value matches -->
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="id_session" class="form-label">Session</label>
+                    <select name="session" id="id_session" class="form-select form-select-sm">
+                        {% for  session_name in sessionq %}
+                        <option value="{{ session_name }}" {% if session_name == values.academic_session %} selected {% endif %}>
+                            {{ session_name }}</option> <!-- Added selected attribute if the value matches -->
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="academic" class="form-label">Academic Fees</label>
+                    <input type="number" value="{{values.academic_fees}}" name="academic" id="academic" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-12">
+                    <label for="student" class="form-label">Student Fee</label>
+                    <input type="number" value="{{values.student_fees}}" name="student" id="student" class="form-control form-control-sm">
+                </div>
+                <div class="col-md-12">
+                    <label for="exams" class="form-label">Examination Fees</label>
+                    <input type="number" value="{{values.exams_fees}}" name="exams" id="exams" class="form-control form-control-sm">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

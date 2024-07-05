@@ -1,0 +1,3 @@
+pip install vonage
+pip install reportlib
+pip install tablib

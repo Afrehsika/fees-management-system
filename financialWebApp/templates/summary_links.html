@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Select Level</h1>
+    <ul class="list-unstyled">
+        {% for level_code, level_name in levels %}
+            <li class="mb-3"><a class="btn btn-primary btn-center" href="{% url 'finance:level_summary' level_code %}">{{ level_name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

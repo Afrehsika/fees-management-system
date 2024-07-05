@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+   
+</head>
+<body>
+    <div class="receipt">
+        <h2>Payment Receipt</h2>
+        <div class="detail">
+            <label>Student Name:</label>
+            <span>{{ student.name }}</span>
+        </div>
+        <div class="detail">
+            <label>Amount Paid:</label>
+            <span>GHS {{ payment_amount }}</span>
+        </div>
+        <div class="detail">
+            <label>Payment Date:</label>
+            <span>{{ payment_date }}</span>
+        </div>
+        <div class="detail">
+            <label>Payment Method:</label>
+            <span>{{ payment_method }}</span>
+        </div>
+        <div class="detail">
+            <label>Bank of Payment:</label>
+            <span>{{ bank_of_payment }}</span>
+        </div>
+        <div class="detail">
+            <label>Draft No:</label>
+            <span>{{ draft_no }}</span>
+        </div>
+    </div>
+</body>
+</html>
+

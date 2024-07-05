@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+    {% include 'partials/_messages.html' %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Session</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Session</li>
+        </ol>
+    </nav>
+</div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Session List</h2>
+        </div>
+        <div class="col-md-2 text-right">
+            <a href="{% url 'finance:session_add' %}" class="btn btn-primary">Add Session</a>
+        </div>
+    </div>
+
+
+    {% if session %}
+    <div class="table-responsive app-table mt-4">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Session</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Current Session</th>
+                    
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in session  %}
+                <tr>
+                    <td>{{ s.session }}</td>
+                    <td>{{ s.start_date }}</td>
+                    <td>{{ s.end_date }}</td>
+                    <td>{{ s.is_current_session }}</td> 
+                    
+                    <td>
+                        <a href="{% url 'finance:session_update' s.id %}" class="btn btn-info btn-sm">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No Session Found
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock content %}
+
+
+
+{% for s in session  %}
+<h1>{{s.session}}</h1>
+{% endfor %}

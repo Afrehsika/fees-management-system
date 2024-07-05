@@ -1,0 +1,71 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+        background-image: url("{% static 'img/ARCE.jpg' %}");
+        background-size: contain;
+        background-position: center; 
+    }
+    .card {
+        border: 1px solid #ced4da; /* Gray border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        width: 500px;
+        background-color: rgb(151, 201, 241)
+    }
+
+    .card-body {
+        padding: 2rem; /* Padding inside the card */
+    }
+    .card-title {
+        color: #343a40; /* Dark text color */
+        font-size: 1.5rem; /* Larger title font size */
+        text-align: center; /* Center align the title */
+    }
+    .form-group {
+        margin-bottom: 1.5rem; /* Space between form elements */
+    }
+    .showPasswordToggle {
+        cursor: pointer; /* Change cursor to pointer on hover */
+    }
+    .submitBtn {
+        background-color: #007bff; /* Blue button background */
+        color: #fff; /* White button text color */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Rounded button corners */
+        padding: 0.5rem 1rem; /* Padding inside the button */
+        transition: background-color 0.3s; /* Smooth button color transition */
+    }
+    .submitBtn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card mt-5">
+            <div class="card-body">
+                <div class="card-title py-3">
+                    <h4>LOGIN HERE</h4>
+                </div>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% include 'partials/_messages.html' %}
+                    <div class="form-group">
+                        <input type="text" name="Username" placeholder="Username" id="UsernameField" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="Password" placeholder="Password" id="PasswordField" class="form-control form-control-sm">
+                    </div>
+                    <div class="float-right py-3 showPasswordToggle">SHOW</div>
+                    <input type="submit" value="Login" class="btn btn-block btn-secondary submitBtn">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock content %}

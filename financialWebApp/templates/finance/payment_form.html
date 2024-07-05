@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    {% include 'partials/_messages.html' %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Payment</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Make Payment</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container mb-4">
+    <div class="card bg-primary">
+        <div class="card-body">
+            <h3 class="card-title text-center text-light">{{ student.name|title }} with Index Number of {{ student.index_number }} <br>is about to make Payment</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Make Payment</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'finance:process_payment' student_id=student.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="paid_amount" class="form-label">Amount Paid:</label>
+                            <input type="number" name="paid_amount" id="paid_amount" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bank_of_payment" class="form-label">Bank of Payment:</label>
+                            <input type="text" name="bank_of_payment" id="bank_of_payment" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="draft_no" class="form-label">Draft Number:</label>
+                            <input type="text" name="draft_no" id="draft_no" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

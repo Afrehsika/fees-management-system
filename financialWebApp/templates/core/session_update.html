@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h1>Update Session</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="session">Session:</label><br>
+        <input type="text"  class="form-control" id="session" name="session" value="{{ session.session }}"><br><br>
+        
+        <label for="start_date">Start Date:</label><br>
+        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ session.start_date }}"><br><br>
+        
+        <label for="end_date">End Date:</label><br>
+        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ session.end_date }}"><br><br>
+        
+        <label for="is_current_session">Is Current Session:</label><br>
+        <input type="checkbox" value="true" id="is_current_session" name="is_current_session" {% if session.is_current_session %}checked{% endif %}><br><br>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endblock content %}

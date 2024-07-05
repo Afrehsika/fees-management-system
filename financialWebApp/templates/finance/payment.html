@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+    {% include 'partials/_messages.html' %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Payment</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Make Payment</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4 py-3">
+            <div class="form-group">
+                <input type="text"class="form-control" id="searchField" placeholder="Search">
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    {% if page_obj %}
+    <div class="table-responsive  app-table ">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Index Number</th>
+                    <th>Level</th>
+                    <th>Total Fees</th>
+                    <th>Amount Paid</th>
+                    <th>Payment Balance</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in page_obj %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.index_number }}</td>
+                    <td>{{ student.level }}</td>
+                    <td>GH&#8373; {{student.total_fees }}</td>
+                    <td>GH&#8373; {{student.total_paid }}</td>
+                    <td>GH&#8373; {{ student.balance }}</td>
+                    <td>
+                        <a href="{% url 'finance:process_payment' student.id %}" class="btn btn-warning btn-sm">Make Payment</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    
+    <div class="table-output">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Student ID</th>
+                    <th>Index Number</th>
+                    <th>Level</th>
+                    <th>Payment Balance</th>
+                    <th>Total Fees</th>
+                    <th>Amount Paid</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+              
+                
+               
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div class="pagination-container ">
+        <div>
+            <span class="current-page align-right float-right mr-auto py-3">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        </div>
+        <div>
+            {% if page_obj.has_previous %}
+                <a class="btn btn-primary btn-sm " href="?page=1">&laquo; First</a>
+                <a class="btn btn-primary btn-sm" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-primary btn-sm" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-primary btn-sm" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No students found.
+    </div>
+    {% endif %}
+</div>
+
+<script src="{% static 'js/searchPayment.js' %}"></script>
+{% endblock content %}

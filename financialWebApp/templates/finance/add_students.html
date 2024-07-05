@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'finance:student' %}">Students</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Students</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Student</h5>
+            <form action="{% url 'finance:add_student' %}" method="post" class="row g-3">
+                {% csrf_token %}
+                {% include 'partials/_messages.html' %}
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" name="name" value="{{ values.name }}" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="student_id" class="form-label">Student ID</label>
+                    <input type="number" id="student_id" name="student_id" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="index_number" class="form-label">Index Number</label>
+                    <input type="number" id="index_number" name="index_number" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="reference_number" class="form-label">Reference Number</label>
+                    <input type="number" id="reference_number" name="reference_number" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone(start with 233)</label>
+                    <input type="text" id="phone" name="phone" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="level" class="form-label">Level</label>
+                    <select id="level" name="level" class="form-select">
+                        {% for level_code, level_name in level %}
+                        <option value="{{ level_code }}">{{ level_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

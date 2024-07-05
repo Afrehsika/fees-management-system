@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Summary</title>
+</head>
+<body>
+    <h1>Summary for Level {{ level }} - Session {{ session.session }}</h1>
+    <!-- Display summary information here -->
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Balance Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Balance Summary</h1>
+        <h2>Session: {{ session }}</h2>
+        <h2>Level: {{ level }}</h2>
+        <div class="col-md-2 text-right">
+            <a href="#" class="btn btn-primary">Print</a>
+        </div>      
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student_balance in student_balances %}
+                <tr>
+                    <td>{{ student_balance.student.name }}</td>
+                    <td>${{ student_balance.balance }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

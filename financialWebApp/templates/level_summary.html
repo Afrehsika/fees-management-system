@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Select Session for Level {{ level }}</h1>
+    <ul class="list-unstyled">
+        {% for session in sessions %}
+            <li class="mb-3"><a class="btn btn-primary btn-block" href="{% url 'finance:session_summary' level session.id %}">{{ session.session }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
